@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无任何优化渲染列表</title>
+</head>
+
+<body>
+    <div id="ul">
+
+    </div>
+    <script>
+        let total = 100000
+        // 偏移量
+        let index = 0
+        let id = 0
+        let start = Date.now()
+        function load() {
+            index += 50
+            if (index < total) {
+                requestAnimationFrame(() => {
+                    let fragment = document.createDocumentFragment()
+                    for (let i = 0; i < 50; i++) {
+                        let li = document.createElement('li')
+                        li.innerHTML = id++
+                        fragment.appendChild(li)
+                    }
+                    ul.appendChild(fragment)
+                    load()
+                })
+            }
+        }
+        load()
+
+        let end = Date.now()
+        console.log(end - start, '执行时间')
+        setTimeout(() => {
+            console.log(Date.now() - end, '渲染时间')
+        }, 0)
+        // 分片加载会导致也看dom过多，造成页面卡顿
+        // 虚拟列表优化
+    </script>
+</body>
+
+</html>

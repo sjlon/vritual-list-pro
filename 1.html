@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无任何优化渲染列表</title>
+</head>
+
+<body>
+    <div id="ul">
+
+    </div>
+    <script>
+        let start = Date.now()
+
+        for (let i = 0; i <= 100000; i++) {
+            let li = document.createElement('li')
+            li.innerHTML = i
+            ul.appendChild(li)
+        }
+        let end = Date.now()
+        console.log(end - start, '执行时间')
+        setTimeout(() => {
+            console.log(Date.now() - end, '渲染时间')
+        }, 0)
+        // 分片-根据数据大小每一次加载固定的数量
+    </script>
+</body>
+
+</html>
